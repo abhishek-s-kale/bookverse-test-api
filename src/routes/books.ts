@@ -1,11 +1,12 @@
 import express from "express";
+import { books } from "../data/mockData";
 
 const router = express.Router();
 // Dummy route for books
 
 router.get('/', (req, res) => {
     // Fetch books logic
-    res.json({ message: 'List of books', books: [] });
+    res.json({ message: 'List of books', books: books });
 });
 
 //single book route based on id parameter
