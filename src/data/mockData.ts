@@ -30,21 +30,22 @@ export const books:Book[]=[
         title:"The Great Gatsby",
         author:"F. Scott Fitzgerald",
         genre:"Fiction",
-        publishedDate:new Date("1925-04-10")
+        year:1994
     },
     {
         id:randomUUID(),
         title:"To Kill a Mockingbird",
         author:"Harper Lee",
         genre:"Fiction",
-        publishedDate:new Date("1960-07-11")
+        year:2004
     },
     {
         id:randomUUID(),
         title:"1984",
         author:"George Orwell",
         genre:"Dystopian",
-        publishedDate:new Date("1949-06-08")
+        year:1980,
+        summary:"a good books random summary"
     }
 ]
 export const reviews:Review[]=[

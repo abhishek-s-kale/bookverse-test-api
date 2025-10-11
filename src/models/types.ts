@@ -10,7 +10,8 @@ export interface Book {
     title:string;
     author:string;
     genre:string;
-    publishedDate:Date;
+    year:number;
+    summary?:string
 }
 
 export interface Review {
