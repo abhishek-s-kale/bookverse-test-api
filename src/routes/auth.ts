@@ -41,8 +41,6 @@ router.post('/login',validate(loginSchema), (req, res,next) => {
     const { email, password } = req.body as z.infer<typeof loginSchema>;
    
     const user = users.find((u)=>u.email===email)
-    console.log(user)
-    console.log(bcrypt.decodeBase64(user.passwordHash,8))
     if(!user){
         return next(ApiErrors.unAuthorized("Invalid credentials. Email Not found"));
     }

@@ -2,7 +2,6 @@ import express from "express";
 import { z } from "zod";
 import { authMiddleware } from "../middleware/auth";
 import { randomUUID } from "crypto";
-import { generateToken } from '../utils/jwt';
 import { validate } from "../middleware/validate";
 import { ApiErrors } from "../errors/ApiErrors";
 import { books } from "../data/mockData";

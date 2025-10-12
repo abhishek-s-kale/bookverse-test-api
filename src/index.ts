@@ -5,7 +5,7 @@ import cors from 'cors';
 import authRouter from './routes/auth';
 import bookRouter from './routes/books';
 import reviewRouter from './routes/reviews';
-//import { errorHandler } from './middlewares/errorHandler';    
+import { errorHandler } from './middleware/ErrorHandler';    
 
 dotenv.config();
 const app = express();
@@ -20,7 +20,7 @@ app.use('/api/reviews', reviewRouter);
 
 const PORT = process.env.PORT || 3000;
 
-//app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

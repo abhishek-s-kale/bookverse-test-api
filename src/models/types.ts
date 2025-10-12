@@ -23,7 +23,5 @@ export interface Review {
 }   
 
 export interface Vote {
-    reviewId:string;
-    userId:string;
     voteType:'upvote' | 'downvote';
 }
