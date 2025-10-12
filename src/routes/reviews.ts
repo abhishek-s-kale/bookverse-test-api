@@ -19,6 +19,7 @@ const createreviewSchema = z.object({
 });
 
 const voteSchema = z.object({
+    userId: z.string().min(1),
     voteType: z.enum(['upvote', 'downvote'])
 })
 
@@ -45,6 +46,15 @@ router.post('/', validate(createreviewSchema), (req, res, next) => {
     res.status(201).json({ message: 'Review added successfully', review: newReview });
 });
 
+router.get('/getAllReviews', (req, res,next) => {
+    //if user  is valid then only return reviews
+    const user = (req as any).user;
+    if (!user || !user.id) {
+        return next(ApiErrors.unAuthorized());
+    }
+    res.json({ message: 'List of all reviews', reviews });
+});
+
 router.patch('/:id',authMiddleware, validate(voteSchema), (req, res, next) => {
     const {id}= req.params
    const body = req.body as z.infer<typeof voteSchema>;
@@ -53,16 +63,17 @@ router.patch('/:id',authMiddleware, validate(voteSchema), (req, res, next) => {
         return next(ApiErrors.unAuthorized());
     }
     //ensure book exists
-    const review = reviews.find((r) => `${r.bookId}_${r.userId}` === id);
+    const review = reviews.find((r) => r.bookId === id);
     if (!review) {
         return next(ApiErrors.badRequest("Review not found"));
     }
-    const existingVote = review.votes[user.id]
-    if(existingVote === body){
-        delete review.votes[user.id];
+    //make sure for each review for a user there is only one vote
+    const existingVote = review.votes.find((v) => v.userId === user.id);
+    if(existingVote?.voteType === body.voteType){
+        review.votes = review.votes.filter((v) => v.userId !== user.id);
     }
     else {
-        review.votes[user.id] = body;
+        review.votes.push(body);
     }
      res.status(200).json({
         id: review.bookId+'_'+review.userId,
