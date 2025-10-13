@@ -1,30 +1,24 @@
-import { User, Book, Review, Vote } from "../models/types.js";
 import bcrypt from 'bcryptjs';
-import { randomUUID } from "crypto";
-
-const user1: User = {
+const user1 = {
     id: "user_1",
     userName: "john_doe",
     email: "john@example.com",
     passwordHash: bcrypt.hashSync("password123", 8)
-}
-const user2: User = {
+};
+const user2 = {
     id: "user_2",
     userName: "bob",
     email: "bob@example.com",
     passwordHash: bcrypt.hashSync("password123", 8)
-}
-
-const user3: User = {
+};
+const user3 = {
     id: "user_3",
     userName: "carl",
     email: "carl@example.com",
     passwordHash: bcrypt.hashSync("password123", 8)
-}
-
-export const users: User[] = [user1, user2, user3]
-
-export const books: Book[] = [
+};
+export const users = [user1, user2, user3];
+export const books = [
     {
         id: "book_1",
         title: "The Great Gatsby",
@@ -47,8 +41,8 @@ export const books: Book[] = [
         year: 1980,
         summary: "a good books random summary"
     }
-]
-export const reviews: Review[] = [
+];
+export const reviews = [
     {
         bookId: books[0].id,
         userId: user1.id,
@@ -97,4 +91,4 @@ export const reviews: Review[] = [
             }
         ]
     }
-]
+];
