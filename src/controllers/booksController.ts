@@ -8,6 +8,15 @@ export const getAllBooks = async (req: Request, res: Response) => {
     res.status(200).json(books);
 }
 
+export const getBookById = async (req: Request, res: Response, next: any) => {
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    if (!book) {
+        return next(ApiErrors.notFound('Book not found'));
+    }
+    res.status(200).json(book);
+}
+
 export const createBook = async (req: Request, res: Response) => {
     const { title, author, genre, year, summary } = req.body;
     if (!title || !author || !genre || !year) {

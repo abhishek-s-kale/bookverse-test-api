@@ -1,7 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import { authMiddleware } from "../middleware/auth.js";
-import {getAllBooks,createBook} from '../controllers/booksController.js';
+import {getAllBooks,createBook,getBookById} from '../controllers/booksController.js';
 import { randomUUID } from "crypto";
 import { validate } from "../middleware/validate.js";
 //import { ApiErrors } from "../errors/ApiErrors.js";
@@ -23,13 +23,8 @@ const createBookSchema = z.object({
     summary:z.string().optional()
 })
 
-
 //single book route based on id parameter
-router.get('/:id', (req, res) => {
-    const { id } = req.params;
-    // Fetch single book logic
-    res.json({ message: `Details of book with id ${id}`, book: { id } });
-});
+router.get('/:id', getBookById);
 
 router.post('/', validate(createBookSchema), createBook);
 

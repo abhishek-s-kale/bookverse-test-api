@@ -32,23 +32,23 @@ export const addReview = async (req: Request, res: Response, next: NextFunction)
     await book.save();
 
     res.status(201).json({
-        message:"review added successfully",
-        review:newReview
+        message: "review added successfully",
+        review: newReview
     });
 
 }
 
-export const getReviewsForBook = async (req: Request, res: Response,next:NextFunction) => {
+export const getReviewsForBook = async (req: Request, res: Response, next: NextFunction) => {
     try {
-          const { bookId } = req.params;
-    const reviews = await Review.find({ bookId }).populate('userId', 'userName');
-    res.status(200).json(reviews);
+        const { bookId } = req.params;
+        const reviews = await Review.find({ bookId }).populate('userId', 'userName');
+        res.status(200).json(reviews);
     } catch (error) {
         next(ApiErrors.internal('Something went wrong'));
     }
-  
 }
 /*
+
 export const voteForReviews = async (req: Request, res: Response,next:NextFunction) => {
     const { reviewId, voteType } = req.body;
     const userId=req.user?.id
