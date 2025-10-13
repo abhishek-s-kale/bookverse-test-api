@@ -1,9 +1,8 @@
-// export interface User {
-//     id:string;   
-//     userName:string;
-//     email:string;
-//     passwordHash:string;
-// }
+export interface IUser extends Document {
+    userName:string;
+    email:string;
+    passwordHash:string;
+}
 
 export interface Book {
     id:string,
