@@ -9,7 +9,7 @@ export interface IUser extends Document {
 export interface IBook extends Document {
     title:string;
     author:string;
-    genre:string;
+    genre:bookGenre;
     year:number;
     summary?:string
 }
@@ -26,3 +26,5 @@ export interface IVote {
     userId:string;
     voteType:'upvote' | 'downvote';
 }
+
+export enum bookGenre { "Programming", "Fiction", "Science", "History" }
