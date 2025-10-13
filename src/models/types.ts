@@ -1,4 +1,4 @@
-import {Document} from 'mongoose';
+import mongoose,{Document} from 'mongoose';
 
 export interface IUser extends Document {
     userName:string;
@@ -11,19 +11,21 @@ export interface IBook extends Document {
     author:string;
     genre:"Programming" | "Fiction" | "Science" | "History";
     year:number;
-    summary?:string
+    summary?:string,
+    averageRating?:number;
+    reviewCount?:number;
 }
 
-export interface IReview {
-    bookId:string;
-    userId:string;
+export interface IReview extends Document {
+    bookId:mongoose.Types.ObjectId;
+    userId:mongoose.Types.ObjectId;
     rating:number;
     comment:string;
     votes:IVote[];
 }   
 
 export interface IVote {
-    userId:string;
+    userId:mongoose.Types.ObjectId;
     voteType:'upvote' | 'downvote';
 }
 
