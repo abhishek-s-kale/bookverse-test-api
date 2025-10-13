@@ -9,7 +9,7 @@ export interface IUser extends Document {
 export interface IBook extends Document {
     title:string;
     author:string;
-    genre:bookGenre;
+    genre:"Programming" | "Fiction" | "Science" | "History";
     year:number;
     summary?:string
 }
