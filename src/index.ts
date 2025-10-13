@@ -9,7 +9,7 @@ import { errorHandler } from './middleware/ErrorHandler.js';
 import { connectDB } from "./config/db.js";
 
 dotenv.config();
-//await connectDB();
+await connectDB();
 const app = express();
 
 app.use(cors());

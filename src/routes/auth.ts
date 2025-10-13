@@ -1,6 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
+import {register, login}  from "../controllers/authController.js";
 import { users } from "../data/mockData.js";
 import { randomUUID } from "crypto";
 import { generateToken } from '../utils/jwt.js';
@@ -20,36 +21,8 @@ const loginSchema = z.object({
 });
 
 // Dummy route for authentication
-router.post('/register', validate(registerSchema), (req, res, next) => {
-    const { userName, email, password } = req.body as z.infer<typeof registerSchema>;
-    const exists = users.find((u) => u.email === email);
-    if (exists) {
-        return next(ApiErrors.badRequest("Email already registered"));
-    }
-    const user = {
-        id: randomUUID(),
-        userName,
-        email,
-        passwordHash: bcrypt.hashSync(password, 8)
-    }
-    users.push(user);
-    const token = generateToken({ id: user.id, email: user.email })
-    res.status(201).json({ token, user: { id: user.id, userName: user.userName, email: user.email } });
-});
+router.post('/register', validate(registerSchema),register);
 
-router.post('/login',validate(loginSchema), (req, res,next) => {
-    const { email, password } = req.body as z.infer<typeof loginSchema>;
-   
-    const user = users.find((u)=>u.email===email)
-    if(!user){
-        return next(ApiErrors.unAuthorized("Invalid credentials. Email Not found"));
-    }
-    const pwdCheck = bcrypt.compareSync(password,user.passwordHash);
-    if(!pwdCheck){
-        return next(ApiErrors.unAuthorized("Invalid credentials. Email or Password is not correct."))
-    }
-    const token = generateToken({ id: user.id, email: user.email })
-    res.status(201).json({ token, user: { id: user.id, userName: user.userName, email: user.email } });
-});
+router.post('/login',validate(loginSchema),login);
 
 export default router;

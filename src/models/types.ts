@@ -1,9 +1,9 @@
-export interface User {
-    id:string;   
-    userName:string;
-    email:string;
-    passwordHash:string;
-}
+// export interface User {
+//     id:string;   
+//     userName:string;
+//     email:string;
+//     passwordHash:string;
+// }
 
 export interface Book {
     id:string,
