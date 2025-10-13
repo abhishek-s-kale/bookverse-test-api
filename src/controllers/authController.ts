@@ -2,7 +2,7 @@ import  {Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils/jwt.js';
-import {User,IUser} from '../models/User.js';
+import {User} from '../models/User.js';
 import { ApiErrors } from '../errors/ApiErrors.js';
 
 export const register = async (req:Request, res:Response) => {

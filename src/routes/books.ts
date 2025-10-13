@@ -1,6 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import { authMiddleware } from "../middleware/auth.js";
+import {getAllBooks,createBook} from '../controllers/booksController.js';
 import { randomUUID } from "crypto";
 import { validate } from "../middleware/validate.js";
 import { ApiErrors } from "../errors/ApiErrors.js";
@@ -12,6 +13,8 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+router.get('/', getAllBooks);
+
 const createBookSchema = z.object({
     title:z.string().min(1),
     author:z.string().min(1),
@@ -20,10 +23,10 @@ const createBookSchema = z.object({
     summary:z.string().optional()
 })
 
-router.get('/', (req, res) => {
-    // Fetch books logic
-    res.json({ message: 'List of books', books: books });
-});
+// router.get('/', (req, res) => {
+//     // Fetch books logic
+//     res.json({ message: 'List of books', books: books });
+// });
 
 //single book route based on id parameter
 router.get('/:id', (req, res) => {
@@ -32,19 +35,6 @@ router.get('/:id', (req, res) => {
     res.json({ message: `Details of book with id ${id}`, book: { id } });
 });
 
-router.post('/', validate(createBookSchema), (req, res,next) => {
-    const body = req.body as z.infer<typeof createBookSchema>;
-    const user = (req as any).user;
-    if(!user || !user.id){
-        return next(ApiErrors.unAuthorized());
-    }
-    const newBook= {
-        id:randomUUID(),
-        ...body,
-    }
-    books.unshift(newBook)
-    // Add book logic
-    res.status(201).json({ message: 'Book added successfully', book: newBook });
-});
+router.post('/', validate(createBookSchema), createBook);
 
 export default router;

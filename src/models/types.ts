@@ -1,11 +1,12 @@
+import {Document} from 'mongoose';
+
 export interface IUser extends Document {
     userName:string;
     email:string;
     passwordHash:string;
 }
 
-export interface Book {
-    id:string,
+export interface IBook extends Document {
     title:string;
     author:string;
     genre:string;
@@ -13,15 +14,15 @@ export interface Book {
     summary?:string
 }
 
-export interface Review {
+export interface IReview {
     bookId:string;
     userId:string;
     rating:number;
     comment:string;
-    votes:Vote[];
+    votes:IVote[];
 }   
 
-export interface Vote {
+export interface IVote {
     userId:string;
     voteType:'upvote' | 'downvote';
 }
