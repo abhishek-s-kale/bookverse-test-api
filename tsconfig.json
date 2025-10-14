@@ -9,11 +9,12 @@
     // See also https://aka.ms/tsconfig/module
     "module": "NodeNext",
     "target": "es2022",
-    "types": [],
+    "types": ["jest", "node"],
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true, 
     "skipLibCheck": true,
   },
-  "include": ["src"]
+   "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
 }
