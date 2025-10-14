@@ -19,9 +19,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/books', bookRouter);
 app.use('/api/reviews', reviewRouter);  
 
-
 const PORT = process.env.PORT || 3000;
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
