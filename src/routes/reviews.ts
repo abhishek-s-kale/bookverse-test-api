@@ -5,7 +5,7 @@ import { randomUUID } from "crypto";
 import { validate } from "../middleware/validate.js";
 import { ApiErrors } from "../errors/ApiErrors.js";
 import { books, reviews } from "../data/mockData.js";
-import { addReview, getReviewsForBook } from '../controllers/reviewController.js'
+import { addReview, getReviewsForBook,voteForReviews } from '../controllers/reviewController.js'
 
 const router = express.Router();
 
@@ -40,30 +40,6 @@ router.get('/getAllReviews', (req, res, next) => {
     res.json({ message: 'List of all reviews', reviews });
 });
 
-router.patch('/:id', authMiddleware, validate(voteSchema), (req, res, next) => {
-    const { id } = req.params
-    const body = req.body as z.infer<typeof voteSchema>;
-    const user = (req as any).user;
-    if (!user || !user.id) {
-        return next(ApiErrors.unAuthorized());
-    }
-
-    const review = reviews.find((r) => r.bookId === id);
-    if (!review) {
-        return next(ApiErrors.badRequest("Review not found"));
-    }
-   
-    const existingVote = review.votes.find((v) => v.userId === user.id);
-    if (existingVote?.voteType === body.voteType) {
-        review.votes = review.votes.filter((v) => v.userId !== user.id);
-    }
-    else {
-        review.votes.push(body);
-    }
-    res.status(200).json({
-        id: review.bookId + '_' + review.userId,
-        votes: review.votes
-    });
-});
+router.patch('/:id',validate(voteSchema), voteForReviews);
 
 export default router;

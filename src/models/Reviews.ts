@@ -8,7 +8,7 @@ export const reviewSchema = new Schema<IReview>({
     comment: { type: String, required: true },
     votes: [
         { 
-            user:{ type: Schema.Types.ObjectId, ref:"User", required: true },
+            userId:{ type: Schema.Types.ObjectId, ref:"User", required: true },
             voteType: { type: String, enum: ['upvote', 'downvote'], required: true }
         }]
 });

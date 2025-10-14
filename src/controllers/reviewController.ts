@@ -47,16 +47,25 @@ export const getReviewsForBook = async (req: Request, res: Response, next: NextF
         next(ApiErrors.internal('Something went wrong'));
     }
 }
-/*
 
-export const voteForReviews = async (req: Request, res: Response,next:NextFunction) => {
-    const { reviewId, voteType } = req.body;
-    const userId=req.user?.id
-
-    if(!voteType || !['upvote','downvote'].includes(voteType)){
+export const voteForReviews = async (req: Request, res: Response, next: NextFunction) => {
+    const { userId, voteType } = req.body;
+    const reviewId = req.params.id;
+    if (!voteType || !['upvote', 'downvote'].includes(voteType)) {
         return next(ApiErrors.badRequest('Invalid vote type'));
     }
-    const review =await Review.findById(review
-
-
-}*/
+    const review = await Review.findById(reviewId);
+    if (!review) {
+        return next(ApiErrors.notFound('Review not found'));
+    }
+    const existingVote = review.votes.find((v) => v.userId === userId);
+    if (existingVote) {
+        existingVote.voteType = voteType;
+    } else {
+        review.votes.push({ userId, voteType });                    
+    }
+    await review.save();
+    res.status(200).json({
+        votes: review.votes
+    });
+}
