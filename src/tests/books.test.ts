@@ -2,7 +2,7 @@ import request from 'supertest';
 import express from 'express';
 import bookRouter from '../routes/books.js';
 import  {setupTestDB,teardownTestDB}  from './setupTestDB.js';
-import { Book } from '../models/Books.js';
+
 
 const app = express();
 app.use(express.json());

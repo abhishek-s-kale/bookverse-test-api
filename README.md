@@ -15,4 +15,6 @@ use below values in .env
 PORT = 3000
 MONGODB_URI = Mongo-url-provided-separately
 
+-make use of bookverse.json which is the postman file
+
 
