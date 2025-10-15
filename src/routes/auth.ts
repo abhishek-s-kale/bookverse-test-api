@@ -1,12 +1,7 @@
 import express from "express";
 import { z } from "zod";
-import bcrypt from "bcryptjs";
 import {register, login}  from "../controllers/authController.ts";
-import { users } from "../data/mockData.ts";
-import { randomUUID } from "crypto";
-import { generateToken } from '../utils/jwt.js';
 import { validate } from "../middleware/validate.ts";
-import { ApiErrors } from "../errors/ApiErrors.ts";
 
 const router = express.Router();
 export const registerSchema = z.object({
@@ -24,7 +19,6 @@ const loginSchema = z.object({
     password: z.string().min(8)
 });
 
-// Dummy route for authentication
 router.post('/register', validate(registerSchema),register);
 
 router.post('/login',validate(loginSchema),login);
