@@ -76,11 +76,9 @@ export const voteForReviews = async (
     return next(ApiErrors.notFound("Review not found"));
   }
   const existingVote = review.votes.find((v) => v.userId.toString() === userId);
-  console.log("existingVote", existingVote);
   if (existingVote) {
     existingVote.voteType = voteType;
   } else {
-    console.log("in else");
     review.votes.push({ userId, voteType });
   }
   await review.save();
