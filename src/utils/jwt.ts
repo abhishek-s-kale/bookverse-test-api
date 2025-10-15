@@ -11,8 +11,9 @@ export type JWTPayload = {
 };
 
 export const generateToken = (user: JWTPayload): string => {
-  // expiresIn can be string (e.g. '2h') or number (seconds)
-  return jwt.sign(user, JWT_SECRET, { expiresIn: 3600 });
+
+  //temp fix for expires in error - need to use JWT_EXPIRES_IN later
+  return jwt.sign(user, JWT_SECRET, { expiresIn: 36000 });
 };
 
 export const verifyToken = (token: string) => {
