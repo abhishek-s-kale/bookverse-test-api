@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { generateToken } from "../utils/jwt.js";
-import { User } from "../models/User.js";
-import { ApiErrors } from "../errors/ApiErrors.js";
+import { generateToken } from "../utils/jwt.ts";
+import { User } from "../models/User.ts";
+import { ApiErrors } from "../errors/ApiErrors.ts";
 
 export const register = async (req: Request, res: Response) => {
   const { userName, email, password } = req.body;

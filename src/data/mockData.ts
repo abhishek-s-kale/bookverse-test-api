@@ -1,4 +1,4 @@
-import { User, Book, Review, Vote } from "../models/types.js";
+import { User, Book, Review, Vote } from "../models/types.ts";
 import bcrypt from 'bcryptjs';
 import { randomUUID } from "crypto";
 

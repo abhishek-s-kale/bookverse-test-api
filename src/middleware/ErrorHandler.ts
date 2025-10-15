@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ApiErrors } from '../errors/ApiErrors.js';
+import { ApiErrors } from '../errors/ApiErrors.ts';
 
 export const errorHandler = (err: unknown, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof ApiErrors) {

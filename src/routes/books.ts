@@ -1,8 +1,8 @@
 import express from "express";
 import { z } from "zod";
-import { authMiddleware } from "../middleware/auth.js";
-import {getAllBooks,createBook,getBookById} from '../controllers/booksController.js';
-import { validate } from "../middleware/validate.js";
+import { authMiddleware } from "../middleware/auth.ts";
+import {getAllBooks,createBook,getBookById} from '../controllers/booksController.ts';
+import { validate } from "../middleware/validate.ts";
 
 const router = express.Router();
 router.use(authMiddleware);

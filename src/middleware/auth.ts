@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
-import { verifyToken } from "../utils/jwt.js";
-import { ApiErrors } from "../errors/ApiErrors.js";
+import { verifyToken } from "../utils/jwt.ts";
+import { ApiErrors } from "../errors/ApiErrors.ts";
 
 export const authMiddleware: RequestHandler = (req, res, next) => {
   const auth = String(req.headers.authorization ?? "");

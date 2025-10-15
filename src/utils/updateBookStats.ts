@@ -1,5 +1,5 @@
-import { Review } from "../models/Reviews.js";
-import { Book } from "../models/Books.js";
+import { Review } from "../models/Reviews.ts";
+import { Book } from "../models/Books.ts";
 
 export const updateBookStats = async (bookId: string) => {
   const reviews = await Review.find({ bookId });

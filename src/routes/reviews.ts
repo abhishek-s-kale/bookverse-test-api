@@ -1,10 +1,10 @@
 import express from "express";
 import { z } from "zod";
-import { authMiddleware } from "../middleware/auth.js";
+import { authMiddleware } from "../middleware/auth.ts";
 import { randomUUID } from "crypto";
-import { validate } from "../middleware/validate.js";
-import { ApiErrors } from "../errors/ApiErrors.js";
-import { books, reviews } from "../data/mockData.js";
+import { validate } from "../middleware/validate.ts";
+import { ApiErrors } from "../errors/ApiErrors.ts";
+import { books, reviews } from "../data/mockData.ts";
 import { addReview, getReviewsForBook,voteForReviews } from '../controllers/reviewController.js'
 
 const router = express.Router();

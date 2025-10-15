@@ -6,7 +6,7 @@ import authRouter from './routes/auth.js';
 import bookRouter from './routes/books.js';
 import reviewRouter from './routes/reviews.js';
 import { errorHandler } from './middleware/ErrorHandler.js';    
-import { connectDB } from "./config/db.js";
+import { connectDB } from "./config/db.ts";
 
 dotenv.config();
 await connectDB();
@@ -20,6 +20,7 @@ app.use('/api/books', bookRouter);
 app.use('/api/reviews', reviewRouter);  
 
 const PORT = process.env.PORT || 3000;
+
 app.use(errorHandler);
 
 app.listen(PORT, () => {

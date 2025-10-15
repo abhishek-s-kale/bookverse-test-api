@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { Review } from "../models/Reviews.js";
-import { Book } from "../models/Books.js";
-import { ApiErrors } from "../errors/ApiErrors.js";
-import { updateBookStats } from "../utils/updateBookStats.js";
+import { Review } from "../models/Reviews.ts";
+import { Book } from "../models/Books.ts";
+import { ApiErrors } from "../errors/ApiErrors.ts";
+import { updateBookStats } from "../utils/updateBookStats.ts";
 
 export const addReview = async (
   req: Request,

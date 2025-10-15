@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import {Review} from '../models/Reviews.js'
-import { Book } from '../models/Books.js';
-import { ApiErrors } from '../errors/ApiErrors.js';
+import {Review} from '../models/Reviews.ts'
+import { Book } from '../models/Books.ts';
+import { ApiErrors } from '../errors/ApiErrors.ts';
 
 export const getAllBooks = async (req: Request, res: Response,next:NextFunction) => {
     try{
@@ -49,7 +49,7 @@ export const getBookById = async (req: Request, res: Response, next: any) => {
     
 }
 
-export const createBook = async (req: Request, res: Response) => {
+export const createBook = async (req: Request, res: Response,next:NextFunction) => {
     try {
             const { title, author, genre, year, summary } = req.body;
     if (!title || !author || !genre || !year) {
