@@ -12,7 +12,11 @@ const router = express.Router();
 export const registerSchema = z.object({
     userName: z.string().min(3),
     email: z.email(),
-    password: z.string().min(8)
+    password: z.string()
+        .min(8)
+        .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+        .regex(/[0-9]/, 'Password must contain at least one number')
+        .regex(/[^A-Za-z0-9]/, 'Password must contain at least one symbol')
 });
 
 const loginSchema = z.object({
