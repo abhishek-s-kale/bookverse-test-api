@@ -12,8 +12,8 @@ const createBookSchema = z.object({
     title:z.string().min(1),
     author:z.string().min(1),
     genre:z.enum([ "Programming", "Fiction", "Science", "History"]),
-    year:z.number().int().positive(),
-    summary:z.string().optional()
+    year:z.number().int().min(1800).max(new Date().getFullYear()),
+    summary: z.string().max(500).optional()
 })
 
 
