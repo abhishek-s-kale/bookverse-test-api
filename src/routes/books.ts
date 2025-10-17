@@ -1,7 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import { authMiddleware } from "../middleware/auth.ts";
-import {getAllBooks,createBook,getBookById} from '../controllers/booksController.ts';
+import {getAllBooks,createBook,getBookById,deleteBook} from '../controllers/booksController.ts';
 import { validate } from "../middleware/validate.ts";
 
 const router = express.Router();
@@ -19,5 +19,6 @@ const createBookSchema = z.object({
 
 router.get('/:id', getBookById);
 router.post('/', validate(createBookSchema), createBook);
+router.delete('/:id', deleteBook);
 
 export default router;

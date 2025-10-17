@@ -8,7 +8,8 @@ const bookSchema = new Schema<IBook>({
     year: { type: Number, required: true },
     summary: { type: String },
     averageRating: { type: Number, default: 0 },
-    reviewCount: { type: Number, default: 0 }
+    reviewCount: { type: Number, default: 0 },
+    isDeleted: { type: Boolean, default: false }
 });
 
 export const Book = mongoose.model<IBook>('Book', bookSchema);

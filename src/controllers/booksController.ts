@@ -63,3 +63,21 @@ export const createBook = async (req: Request, res: Response,next:NextFunction) 
         next(ApiErrors.internal("Failed to fetch this book"))
     }
 }
+
+
+//method for soft delete of book using id
+export const deleteBook = async (req: Request, res: Response,next:NextFunction) => {
+    try {
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    if (!book) {
+        return next(ApiErrors.notFound('Book not found'));
+    }   
+    book.isDeleted = true;
+    await book.save();
+    res.status(200).json({ message: 'Book deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        next(ApiErrors.internal("Failed to delete book"));
+    }   
+}

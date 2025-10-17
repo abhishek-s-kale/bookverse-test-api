@@ -14,6 +14,7 @@ export interface IBook extends Document {
     summary?:string,
     averageRating?:number;
     reviewCount?:number;
+    isDeleted?: boolean;
 }
 
 export interface IReview extends Document {
